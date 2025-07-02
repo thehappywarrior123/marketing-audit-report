@@ -664,4 +664,224 @@
             const gapText = gaps.length > 0 ? gaps.join(', ') : 'advanced AI integration opportunities';
             
             return `
-                <p><strong>${data.companyName}</strong> is doing well with <strong>${strengthText}</strong>.</p
+                <p><strong>${data.companyName}</strong> is doing well with <strong>${strengthText}</strong>.</p>
+                <p>Key opportunities exist in <strong>${gapText}</strong>.</p>
+                <p><strong>Industry Context:</strong> ${industryInsights}</p>
+                <p><strong>Primary Goal:</strong> ${data.primaryGoal} - We can accelerate this through targeted automation and content strategies.</p>
+                ${data.biggestChallenge ? `<p><strong>Main Challenge:</strong> ${data.biggestChallenge}</p>` : ''}
+            `;
+        }
+
+        function generateAutomationRecommendations(manualProcesses, currentCRM) {
+            const recommendations = [];
+            
+            if (manualProcesses.includes('Manual client intake')) {
+                recommendations.push('Implement automated lead capture forms with instant follow-up sequences');
+            }
+            if (manualProcesses.includes('No automated follow-up')) {
+                recommendations.push('Set up drip email campaigns and SMS sequences for lead nurturing');
+            }
+            if (manualProcesses.includes('Manual scheduling')) {
+                recommendations.push('Deploy calendar automation tools (Calendly, Acuity) with CRM integration');
+            }
+            if (manualProcesses.includes('Manual reporting')) {
+                recommendations.push('Create automated dashboards and weekly performance reports');
+            }
+            
+            if (recommendations.length === 0) {
+                recommendations.push('Implement advanced AI chatbots for 24/7 customer engagement');
+                recommendations.push('Set up predictive lead scoring and automated qualification');
+            }
+            
+            return recommendations.map(rec => `<li>${rec}</li>`).join('');
+        }
+
+        function generateContentRecommendations(contentAssets, industry, targetAudience) {
+            const recommendations = [];
+            
+            if (!contentAssets.hasWebsite) {
+                recommendations.push('Priority: Professional website with conversion optimization');
+            }
+            if (!contentAssets.hasCaseStudies) {
+                recommendations.push('Develop 3-5 detailed case studies showcasing ROI and results');
+            }
+            if (!contentAssets.hasLeadMagnets) {
+                recommendations.push('Create industry-specific lead magnets (guides, templates, assessments)');
+            }
+            if (!contentAssets.hasTestimonials) {
+                recommendations.push('Collect and showcase client testimonials and reviews');
+            }
+            if (!contentAssets.hasPitchDecks) {
+                recommendations.push('Design professional pitch decks for sales presentations');
+            }
+            if (!contentAssets.hasBlog) {
+                recommendations.push('Launch content marketing strategy with SEO-optimized blog posts');
+            }
+            
+            if (recommendations.length === 0) {
+                recommendations.push('Optimize existing content for better conversion rates');
+                recommendations.push('Develop advanced content like webinars and video series');
+            }
+            
+            return recommendations.map(rec => `<li>${rec}</li>`).join('');
+        }
+
+        function generateMediaOpportunities(currentChannels, industry, adSpend) {
+            const opportunities = [];
+            
+            if (!currentChannels.includes('Social Media Marketing')) {
+                opportunities.push('LinkedIn and Facebook advertising for B2B lead generation');
+            }
+            if (!currentChannels.includes('Email Marketing')) {
+                opportunities.push('Email marketing automation with segmented campaigns');
+            }
+            if (!currentChannels.includes('PPC/Google Ads')) {
+                opportunities.push('Google Ads for high-intent keyword targeting');
+            }
+            
+            opportunities.push('OTT/CTV advertising for premium brand positioning');
+            opportunities.push('Digital Out-of-Home (DOOH) for local market dominance');
+            opportunities.push('Retargeting campaigns to re-engage website visitors');
+            
+            if (adSpend === '$0') {
+                opportunities.push('Start with $500-1000/month budget for immediate ROI testing');
+            }
+            
+            return opportunities.map(opp => `<li>${opp}</li>`).join('');
+        }
+
+        function generateShortTermRecommendations(manualProcesses, contentAssets) {
+            const recommendations = [];
+            
+            if (manualProcesses.length > 0) {
+                recommendations.push('Set up basic CRM and automation workflows');
+            }
+            if (!contentAssets.hasWebsite) {
+                recommendations.push('Launch professional website with lead capture');
+            }
+            if (!contentAssets.hasLeadMagnets) {
+                recommendations.push('Create first lead magnet and landing page');
+            }
+            
+            recommendations.push('Implement Google Analytics and conversion tracking');
+            recommendations.push('Set up automated email welcome sequences');
+            
+            return recommendations.map(rec => `<li>${rec}</li>`).join('');
+        }
+
+        function generateMidTermRecommendations(currentChannels, adSpend) {
+            const recommendations = [];
+            
+            if (!currentChannels.includes('PPC/Google Ads')) {
+                recommendations.push('Launch Google Ads campaigns with conversion tracking');
+            }
+            if (!currentChannels.includes('Social Media Marketing')) {
+                recommendations.push('Implement social media advertising strategy');
+            }
+            
+            recommendations.push('Develop comprehensive content marketing calendar');
+            recommendations.push('Set up advanced marketing automation sequences');
+            recommendations.push('Implement retargeting campaigns across all channels');
+            
+            return recommendations.map(rec => `<li>${rec}</li>`).join('');
+        }
+
+        function generateServiceRecommendations(automationScore, contentScore, channelScore, monthlyRevenue) {
+            const services = [
+                {
+                    title: 'AI Marketing Automation Setup',
+                    description: 'Complete CRM integration, workflow automation, and AI chatbot implementation',
+                    price: '$2,500 - $5,000',
+                    recommended: automationScore >= 2
+                },
+                {
+                    title: 'Content Asset Development',
+                    description: 'Professional website, case studies, lead magnets, and sales materials',
+                    price: '$3,000 - $7,500',
+                    recommended: contentScore <= 3
+                },
+                {
+                    title: 'Multi-Channel Ad Management',
+                    description: 'Google Ads, Facebook/LinkedIn ads, OTT/CTV, and DOOH campaign management',
+                    price: '$1,500/month + ad spend',
+                    recommended: channelScore <= 2
+                },
+                {
+                    title: 'Full-Service Marketing Partnership',
+                    description: 'Complete marketing department: strategy, content, ads, automation, and reporting',
+                    price: '$5,000 - $15,000/month',
+                    recommended: monthlyRevenue.includes('$100k+')
+                }
+            ];
+            
+            return services.map(service => `
+                <div class="service-card ${service.recommended ? 'recommended' : ''}">
+                    <h3 style="color: #2c3e50; margin-bottom: 10px;">${service.title}</h3>
+                    <p style="margin-bottom: 15px;">${service.description}</p>
+                    <div style="font-weight: 600; color: #e74c3c; font-size: 1.1rem;">${service.price}</div>
+                    ${service.recommended ? '<div style="margin-top: 10px; color: #e74c3c; font-weight: 600;">🎯 RECOMMENDED</div>' : ''}
+                </div>
+            `).join('');
+        }
+
+        function generatePriorityActions(manualProcesses, contentAssets, currentChannels) {
+            const actions = [];
+            
+            if (manualProcesses.length >= 2) {
+                actions.push('Implement marketing automation to eliminate manual processes');
+            }
+            if (!contentAssets.hasWebsite) {
+                actions.push('Launch professional website with lead generation capabilities');
+            }
+            if (!contentAssets.hasLeadMagnets) {
+                actions.push('Create compelling lead magnets to capture prospect information');
+            }
+            if (currentChannels.length <= 2) {
+                actions.push('Expand to high-ROI advertising channels (Google Ads, Social Media)');
+            }
+            
+            actions.push('Set up comprehensive tracking and analytics for all marketing activities');
+            actions.push('Schedule strategy session to prioritize highest-impact initiatives');
+            
+            return actions.map(action => `<li>${action}</li>`).join('');
+        }
+
+        function exportReport() {
+            // Get the report content
+            const reportContent = document.getElementById('reportContent').innerHTML;
+            
+            // Create a new window for printing
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Marketing Audit Report</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; line-height: 1.6; margin: 20px; }
+                        .status-indicator { padding: 4px 8px; border-radius: 12px; font-size: 0.9rem; font-weight: 600; }
+                        .status-yes { background: #d4edda; color: #155724; }
+                        .status-no { background: #f8d7da; color: #721c24; }
+                        .roi-highlight { background: #f39c12; color: white; padding: 20px; border-radius: 10px; margin: 20px 0; text-align: center; }
+                        .service-card { border: 2px solid #e9ecef; border-radius: 10px; padding: 15px; margin: 10px 0; }
+                        .service-card.recommended { border-color: #e74c3c; background: rgba(231, 76, 60, 0.05); }
+                        h1, h2, h3 { color: #2c3e50; }
+                        .export-btn { display: none; }
+                        @media print { .export-btn { display: none !important; } }
+                    </style>
+                </head>
+                <body>
+                    ${reportContent}
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            
+            // Wait for content to load, then print
+            setTimeout(() => {
+                printWindow.print();
+            }, 500);
+        }
+    </script>
+</body>
+</html>
